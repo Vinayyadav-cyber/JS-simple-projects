@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Number Guessing Game</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fefefe;
+      padding: 1em;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      text-align: center;
+      padding: 2em;
+      background-color: burlywood;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    h3 {
+      font-weight: normal;
+      font-size: 1.1rem;
+    }
+
+    button {
+      background-color: darkgrey;
+      margin-top: 1.5em;
+      font-size: 1em;
+      border-radius: 5px;
+      padding: 0.5em 1em;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 1.5em 1em;
+      }
+
+      h2 {
+        font-size: 1.6rem;
+      }
+
+      h3 {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>NUMBER GUESSING GAME</h2>
+    <h3>Try and guess a random number between 1 and 100. You have 10 attempts to guess the right number.</h3>
+    
+    <h1>Guess a number</h1>
+    <input type="number" id="userGuess" placeholder="Enter your guess" />
+    <br />
+    <button onclick="checkGuess()">Submit Guess</button>
+    <p id="message"></p>
+    
+    <h3>Previous Guesses: <span id="prevGuesses"></span></h3>
+    <h3>Guesses Remaining: <span id="remaining"></span></h3>
+  </div>
+
+<script>
+  let secretNumber = Math.floor(Math.random() * 100) + 1;
+  let attempt = 10;
+  let previousGuesses = [];
+  let gameOver = false;
+
+  const userInput = document.querySelector('#userGuess');
+  const message = document.querySelector('#message');
+  const prevGuesses = document.querySelector('#prevGuesses');
+  const remaining = document.querySelector('#remaining');
+
+  remaining.textContent = attempt;
+
+  function checkGuess() {
+    if (gameOver) {
+      message.textContent = "Game over! Click the message above to start a new game.";
+      return;
+    }
+
+    const guess = parseInt(userInput.value);
+
+    if (isNaN(guess) || guess < 1 || guess > 100) {
+      message.textContent = `Please enter a valid number between 1 and 100.`;
+      return;
+    }
+
+    attempt--;
+    previousGuesses.push(guess);
+    prevGuesses.textContent = previousGuesses.join(', ');
+    remaining.textContent = attempt;
+
+    if (secretNumber === guess) {
+      message.textContent = `🎉 Congratulations! You guessed the number right. It was ${secretNumber}.`;
+      endGame();
+    } else if (attempt === 0) {
+      message.textContent = `❌ Game Over! The number was ${secretNumber}.`;
+      endGame();
+    } else {
+      const hint = guess > secretNumber ? "Try lower!" : "Try higher!";
+      message.textContent = `Wrong guess. ${hint} You have ${attempt} attempt(s) left.`;
+    }
+  }
+
+  function endGame() {
+    gameOver = true;
+    message.textContent += " Click here to start a new game.";
+    message.style.color = "blue";
+    message.style.cursor = "pointer";
+    message.addEventListener("click", newStart, { once: true });
+  }
+
+  function newStart() {
+    secretNumber = Math.floor(Math.random() * 100) + 1;
+    attempt = 10;
+    previousGuesses = [];
+    gameOver = false;
+
+    userInput.value = "";
+    message.textContent = "";
+    message.style.color = "black";
+    message.style.cursor = "default";
+    prevGuesses.textContent = "";
+    remaining.textContent = attempt;
+  }
+</script>
+
+</body>
+</html>
