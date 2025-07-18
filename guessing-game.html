@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Color Screen Switcher</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+
+    header {
+      background-color: #222;
+      color: white;
+      padding: 20px 0;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    main {
+      margin-top: 40px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 2px solid #333;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+
+    .button:hover {
+      transform: scale(1.1);
+    }
+
+    #grey {
+      background-color: grey;
+    }
+
+    #white {
+      background-color: white;
+    }
+
+    #yellow {
+      background-color: yellow;
+    }
+
+    #red {
+      background-color: red;
+    }
+
+    .status {
+      margin-top: 30px;
+      font-size: 1.2rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Color Screen Switcher</h1>
+  </header>
+
+  <main>
+    <h2>Choose a color to change the screen background:</h2>
+    <div class="button-container">
+      <span  class="button" id="grey" title="Grey"></span>
+      <span class="button" id="white" title="White"></span>
+      <span class="button" id="yellow" title="Yellow"></span>
+      <span class="button" id="red" title="Red"></span>
+    </div>
+
+    <div class="status" id="statusMessage">Current color: Default</div>
+  </main>
+<script>
+    const button=document.querySelectorAll('.button')
+    const body=document.querySelector('body')
+  button.forEach( (button) =>
+{
+    console.log(button)
+    button.addEventListener('click', function(e) 
+  {
+    const color=e.target.id;
+     body.style.backgroundColor=color;
+     
+ 
+      
+   }
+)
+
+})
+
+</script>
+ 
+</body>
+</html>
