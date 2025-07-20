@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Key Event Info</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+    .insert h3 {
+      color: #444;
+    }
+    table {
+      margin: 20px auto;
+      border-collapse: collapse;
+      width: 300px;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 10px;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <div class="insert">
+    <div class="color">
+      <h3>Insert any keyword</h3>
+    </div>
+  </div>
+
+  <script>
+    const insert = document.querySelector(".insert");
+
+    window.addEventListener("keydown", (e) => {
+      insert.innerHTML = `
+        <table>
+          <tr>
+            <th>Key</th>
+            <th>KeyCode</th>
+            <th>Code</th>
+          </tr>
+          <tr>
+            <td>${e.key === ' ' ? 'Space' : e.key}</td>
+            <td>${e.keyCode}</td>
+            <td>${e.code}</td>
+          </tr>
+        </table>
+      `;
+    });
+  </script>
+</body>
+</html>
